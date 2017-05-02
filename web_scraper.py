@@ -33,9 +33,13 @@ for i,el in enumerate(data):
 		if len(price) > 0: 
 			if is_number(price[0]):
 				tmp.append(float(price[0]))
-	tmp = np.sort(tmp)[1:] #get lowest price
+
+
+
+	if len(tmp) > 1:
+		tmp = np.sort(tmp)[1:] #get lowest price, but the first is usually not correct
 	best_price = tmp[0]
 
 	prices[i] = best_price # store it for laters
 
-	print("Title: %s \t Author: %s \t Lowest Price atm: %.4f\n"%(title,author,best_price))
+	print("Title: %s \t Author: %s \t Lowest Price atm: %.2f\n"%(title,author,best_price))
