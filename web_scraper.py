@@ -6,6 +6,7 @@ import re
 import time
 import smtplib
 import time
+from subprocess import *
 
 def is_number(s):
     try:
@@ -16,6 +17,7 @@ def is_number(s):
 
 reader = csv.reader(open("urls.csv", "r"), delimiter=",") #store the information you want in a csv
 data = list(reader)
+i=0
 while True: #forever    
     prices = np.zeros(len(data)-1)
 
@@ -95,5 +97,11 @@ while True: #forever
     f=open('all_prices.csv','a')
     np.savetxt(f,[prices],fmt='%.2f')
     f.close()
+
+    i+=1 
+    if i%10 == 0: #every now and then, push the data to git
+        call('git add all_prices.csv',shell=True)
+        call('git commit -m "\Updating prices\"',shell=True)
+        call('git push origin master')
     time.sleep(600)
 
