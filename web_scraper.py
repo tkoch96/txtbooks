@@ -98,10 +98,5 @@ while True: #forever
     np.savetxt(f,[prices],fmt='%.2f')
     f.close()
 
-    i+=1 
-    if i%10 == 0: #every now and then, push the data to git
-        call('git add all_prices.csv',shell=True)
-        call('git commit -m "\Updating prices\"',shell=True)
-        call('git push origin master')
     time.sleep(600)
 
